@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+
+var timeStarted = false;
 
 function App() {
-  const [time, updateTime] = React.useState(new Date().toLocaleTimeString());
+  const now = new Date().toLocaleTimeString();
+  const [time, updateTime] = useState(now);
 
   function getTime() {
-    updateTime(new Date().toLocaleTimeString());
-    console.log(time);
+    console.log("IN GETTIME");
+    const newTime = new Date().toLocaleTimeString();
+    updateTime(newTime);
+  }
+
+  // Get time every 1 second.
+  if (!timeStarted) {
+    timeStarted = true;
+    setInterval(getTime, 1000);
   }
 
   return (
